@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: cloudpulse-backend
+  namespace: dev
+  labels:
+    app: cloudpulse-backend
+    environment: dev
+spec:
+  type: ClusterIP
+  selector:
+    app: cloudpulse-backend
+  ports:
+    - name: http
+      port: 9090
+      targetPort: 9090

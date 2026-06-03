@@ -1,0 +1,9 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: cloudpulse-config
+  namespace: dev
+data:
+  ENVIRONMENT: "dev"
+  AI_SERVICE_URL: "http://cloudpulse-ai-service:8000"
+  BACKEND_URL: "http://cloudpulse-backend:9090"

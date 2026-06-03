@@ -1,0 +1,52 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: cloudpulse-backend
+  namespace: dev
+  labels:
+    app: cloudpulse-backend
+    environment: dev
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: cloudpulse-backend
+  template:
+    metadata:
+      labels:
+        app: cloudpulse-backend
+        environment: dev
+    spec:
+      containers:
+        - name: backend
+          image: cloudpulseacr12345.azurecr.io/cloudpulse-backend:dev
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 9090
+          env:
+            - name: AI_SERVICE_URL
+              value: "http://cloudpulse-ai-service:8000"
+          envFrom:
+            - configMapRef:
+                name: cloudpulse-config
+            - secretRef:
+                name: cloudpulse-secret
+          readinessProbe:
+            httpGet:
+              path: /actuator/health
+              port: 9090
+            initialDelaySeconds: 20
+            periodSeconds: 10
+          livenessProbe:
+            httpGet:
+              path: /actuator/health
+              port: 9090
+            initialDelaySeconds: 30
+            periodSeconds: 20
+          resources:
+            requests:
+              cpu: "200m"
+              memory: "256Mi"
+            limits:
+              cpu: "500m"
+              memory: "512Mi"
