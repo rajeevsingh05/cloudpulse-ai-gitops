@@ -24,7 +24,7 @@ spec:
       containers:
         - name: backend
 
-          image: cloudpulseacr12345.azurecr.io/cloudpulse-backend:dev
+          image: cloudpulseacr12345.azurecr.io/cloudpulse-backend:prod
           imagePullPolicy: Always
 
           ports:

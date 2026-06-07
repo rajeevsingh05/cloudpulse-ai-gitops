@@ -24,7 +24,7 @@ spec:
       containers:
         - name: frontend
 
-          image: cloudpulseacr12345.azurecr.io/cloudpulse-frontend:dev
+          image: cloudpulseacr12345.azurecr.io/cloudpulse-frontend:prod
           imagePullPolicy: Always
 
           ports:

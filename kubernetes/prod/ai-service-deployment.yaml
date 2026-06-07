@@ -24,7 +24,7 @@ spec:
       containers:
         - name: ai-service
 
-          image: cloudpulseacr12345.azurecr.io/cloudpulse-ai-service:dev
+          image: cloudpulseacr12345.azurecr.io/cloudpulse-ai-service:prod
           imagePullPolicy: Always
 
           ports:
