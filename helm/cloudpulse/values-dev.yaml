@@ -1,0 +1,34 @@
+namespace: dev
+
+frontend:
+  replicaCount: 1
+  image:
+    tag: dev
+
+backend:
+  replicaCount: 1
+  image:
+    tag: dev
+
+aiService:
+  replicaCount: 1
+  image:
+    tag: dev
+
+config:
+  environment: dev
+
+secret:
+  appSecret: dev-secret-placeholder
+
+hpa:
+  backend:
+    minReplicas: 1
+    maxReplicas: 3
+
+  aiService:
+    minReplicas: 1
+    maxReplicas: 3
+
+ingress:
+  host: ""

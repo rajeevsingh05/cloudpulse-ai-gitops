@@ -1,0 +1,40 @@
+{{- if .Values.ingress.enabled }}
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+
+metadata:
+  name: cloudpulse-ingress
+  namespace: {{ .Values.namespace }}
+
+spec:
+  ingressClassName: {{ .Values.ingress.className | quote }}
+  rules:
+    - {{- if .Values.ingress.host }}
+      host: {{ .Values.ingress.host | quote }}
+      {{- end }}
+      http:
+        paths:
+          - path: {{ .Values.ingress.frontend.path | quote }}
+            pathType: Prefix
+            backend:
+              service:
+                name: {{ .Values.frontend.name }}
+                port:
+                  number: {{ .Values.frontend.service.port }}
+
+          - path: {{ .Values.ingress.backend.path | quote }}
+            pathType: Prefix
+            backend:
+              service:
+                name: {{ .Values.backend.name }}
+                port:
+                  number: {{ .Values.backend.service.port }}
+
+          - path: {{ .Values.ingress.aiService.path | quote }}
+            pathType: Prefix
+            backend:
+              service:
+                name: {{ .Values.aiService.name }}
+                port:
+                  number: {{ .Values.aiService.service.port }}
+{{- end }}

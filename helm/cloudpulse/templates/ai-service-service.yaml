@@ -1,0 +1,19 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ .Values.aiService.name }}
+  namespace: {{ .Values.namespace }}
+  labels:
+    app: {{ .Values.aiService.name }}
+    environment: {{ .Values.config.environment }}
+
+spec:
+  type: {{ .Values.aiService.service.type }}
+
+  selector:
+    app: {{ .Values.aiService.name }}
+
+  ports:
+    - name: http
+      port: {{ .Values.aiService.service.port }}
+      targetPort: 8000

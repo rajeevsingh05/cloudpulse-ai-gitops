@@ -1,0 +1,66 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Values.backend.name }}
+  namespace: {{ .Values.namespace }}
+  labels:
+    app: {{ .Values.backend.name }}
+    environment: {{ .Values.config.environment }}
+
+spec:
+  replicas: {{ .Values.backend.replicaCount }}
+
+  selector:
+    matchLabels:
+      app: {{ .Values.backend.name }}
+
+  template:
+    metadata:
+      labels:
+        app: {{ .Values.backend.name }}
+        environment: {{ .Values.config.environment }}
+
+    spec:
+      containers:
+        - name: backend
+
+          image: "{{ .Values.backend.image.repository }}:{{ .Values.backend.image.tag }}"
+
+          imagePullPolicy: Always
+
+          ports:
+            - containerPort: 9090
+
+          env:
+            - name: AI_SERVICE_URL
+              value: "{{ .Values.config.aiServiceUrl }}"
+
+          envFrom:
+            - configMapRef:
+                name: cloudpulse-config
+
+            - secretRef:
+                name: cloudpulse-secret
+
+          readinessProbe:
+            httpGet:
+              path: /actuator/health
+              port: 9090
+            initialDelaySeconds: 20
+            periodSeconds: 10
+
+          livenessProbe:
+            httpGet:
+              path: /actuator/health
+              port: 9090
+            initialDelaySeconds: 30
+            periodSeconds: 20
+
+          resources:
+            requests:
+              cpu: "200m"
+              memory: "256Mi"
+
+            limits:
+              cpu: "500m"
+              memory: "512Mi"

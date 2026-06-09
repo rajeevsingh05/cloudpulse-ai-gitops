@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: cloudpulse-config
+  namespace: {{ .Values.namespace }}
+
+data:
+  ENVIRONMENT: "{{ .Values.config.environment }}"
+  AI_SERVICE_URL: "{{ .Values.config.aiServiceUrl }}"
+  BACKEND_URL: "{{ .Values.config.backendUrl }}"

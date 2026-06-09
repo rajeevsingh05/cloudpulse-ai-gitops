@@ -1,0 +1,59 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Values.frontend.name }}
+  namespace: {{ .Values.namespace }}
+  labels:
+    app: {{ .Values.frontend.name }}
+    environment: {{ .Values.config.environment }}
+
+spec:
+  replicas: {{ .Values.frontend.replicaCount }}
+
+  selector:
+    matchLabels:
+      app: {{ .Values.frontend.name }}
+
+  template:
+    metadata:
+      labels:
+        app: {{ .Values.frontend.name }}
+        environment: {{ .Values.config.environment }}
+
+    spec:
+      containers:
+        - name: frontend
+
+          image: "{{ .Values.frontend.image.repository }}:{{ .Values.frontend.image.tag }}"
+
+          imagePullPolicy: Always
+
+          ports:
+            - containerPort: 80
+
+          envFrom:
+            - configMapRef:
+                name: cloudpulse-config
+
+          readinessProbe:
+            httpGet:
+              path: /
+              port: 80
+            initialDelaySeconds: 10
+            periodSeconds: 10
+
+          livenessProbe:
+            httpGet:
+              path: /
+              port: 80
+            initialDelaySeconds: 20
+            periodSeconds: 20
+
+          resources:
+            requests:
+              cpu: "100m"
+              memory: "128Mi"
+
+            limits:
+              cpu: "300m"
+              memory: "256Mi"

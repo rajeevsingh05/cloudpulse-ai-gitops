@@ -1,0 +1,65 @@
+namespace: default
+
+frontend:
+  name: cloudpulse-frontend
+  replicaCount: 1
+  image:
+    repository: cloudpulseacr12345.azurecr.io/cloudpulse-frontend
+    tag: latest
+  service:
+    type: ClusterIP
+    port: 80
+
+backend:
+  name: cloudpulse-backend
+  replicaCount: 1
+  image:
+    repository: cloudpulseacr12345.azurecr.io/cloudpulse-backend
+    tag: latest
+  service:
+    type: ClusterIP
+    port: 9090
+
+aiService:
+  name: cloudpulse-ai-service
+  replicaCount: 1
+  image:
+    repository: cloudpulseacr12345.azurecr.io/cloudpulse-ai-service
+    tag: latest
+  service:
+    type: ClusterIP
+    port: 8000
+
+config:
+  environment: default
+  backendUrl: http://cloudpulse-backend:9090
+  aiServiceUrl: http://cloudpulse-ai-service:8000
+
+secret:
+  appSecret: default-secret
+
+hpa:
+  backend:
+    enabled: true
+    minReplicas: 1
+    maxReplicas: 3
+    cpuUtilization: 70
+
+  aiService:
+    enabled: true
+    minReplicas: 1
+    maxReplicas: 3
+    cpuUtilization: 70
+
+ingress:
+  enabled: true
+  className: nginx
+
+  frontend:
+    path: /
+
+  backend:
+    path: /api
+
+  aiService:
+    path: /ai

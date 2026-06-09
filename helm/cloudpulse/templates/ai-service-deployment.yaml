@@ -1,0 +1,62 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Values.aiService.name }}
+  namespace: {{ .Values.namespace }}
+  labels:
+    app: {{ .Values.aiService.name }}
+    environment: {{ .Values.config.environment }}
+
+spec:
+  replicas: {{ .Values.aiService.replicaCount }}
+
+  selector:
+    matchLabels:
+      app: {{ .Values.aiService.name }}
+
+  template:
+    metadata:
+      labels:
+        app: {{ .Values.aiService.name }}
+        environment: {{ .Values.config.environment }}
+
+    spec:
+      containers:
+        - name: ai-service
+
+          image: "{{ .Values.aiService.image.repository }}:{{ .Values.aiService.image.tag }}"
+
+          imagePullPolicy: Always
+
+          ports:
+            - containerPort: 8000
+
+          envFrom:
+            - configMapRef:
+                name: cloudpulse-config
+
+            - secretRef:
+                name: cloudpulse-secret
+
+          readinessProbe:
+            httpGet:
+              path: /health
+              port: 8000
+            initialDelaySeconds: 10
+            periodSeconds: 10
+
+          livenessProbe:
+            httpGet:
+              path: /health
+              port: 8000
+            initialDelaySeconds: 20
+            periodSeconds: 20
+
+          resources:
+            requests:
+              cpu: "100m"
+              memory: "128Mi"
+
+            limits:
+              cpu: "300m"
+              memory: "256Mi"
