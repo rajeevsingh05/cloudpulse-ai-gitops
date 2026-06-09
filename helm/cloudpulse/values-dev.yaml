@@ -3,17 +3,17 @@ namespace: dev
 frontend:
   replicaCount: 1
   image:
-    tag: dev-14
+    tag: dev-15
 
 backend:
   replicaCount: 1
   image:
-    tag: dev-14
+    tag: dev-15
 
 aiService:
   replicaCount: 1
   image:
-    tag: dev-14
+    tag: dev-15
 
 config:
   environment: dev
