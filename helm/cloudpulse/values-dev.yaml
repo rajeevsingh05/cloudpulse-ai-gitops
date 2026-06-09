@@ -16,7 +16,7 @@ aiService:
     tag: dev
 
 config:
-  environment: dev
+  environment: dev-gitops
 
 secret:
   appSecret: dev-secret-placeholder
