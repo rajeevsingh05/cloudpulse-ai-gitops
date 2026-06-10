@@ -31,4 +31,4 @@ hpa:
     maxReplicas: 5
 
 ingress:
-  host: "prod.40.80.76.139.nip.io"
+  host: "prod.4.247.242.122.nip.io"
