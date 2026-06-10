@@ -32,3 +32,6 @@ hpa:
 
 ingress:
   host: "prod.40.80.76.139.nip.io"
+
+keyVault:
+  secretName: cloudpulse-prod-app-secret
