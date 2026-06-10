@@ -3,17 +3,17 @@ namespace: prod
 frontend:
   replicaCount: 2
   image:
-    tag: prod
+    tag: prod-14
 
 backend:
   replicaCount: 2
   image:
-    tag: prod
+    tag: prod-14
 
 aiService:
   replicaCount: 2
   image:
-    tag: prod
+    tag: prod-14
 
 config:
   environment: prod
