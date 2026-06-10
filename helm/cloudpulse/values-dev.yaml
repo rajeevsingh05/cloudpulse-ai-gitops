@@ -1,37 +1,28 @@
 namespace: dev
-
 frontend:
   replicaCount: 1
   image:
-    tag: dev
-
+    tag: dev-16
 backend:
   replicaCount: 1
   image:
     tag: dev-16
-
 aiService:
   replicaCount: 1
   image:
     tag: dev-16
-
 config:
   environment: dev
-
 secret:
   appSecret: dev-secret-placeholder
-
 hpa:
   backend:
     minReplicas: 1
     maxReplicas: 3
-
   aiService:
     minReplicas: 1
     maxReplicas: 3
-
 ingress:
   host: ""
-
 keyVault:
   secretName: cloudpulse-dev-app-secret
