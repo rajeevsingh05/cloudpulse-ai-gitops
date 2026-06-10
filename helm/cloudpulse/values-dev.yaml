@@ -3,7 +3,7 @@ namespace: dev
 frontend:
   replicaCount: 1
   image:
-    tag: dev-16
+    tag: dev
 
 backend:
   replicaCount: 1
