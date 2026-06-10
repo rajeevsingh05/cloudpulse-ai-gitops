@@ -1,37 +1,28 @@
 namespace: prod
-
 frontend:
   replicaCount: 2
   image:
     tag: prod-18
-
 backend:
   replicaCount: 2
   image:
     tag: prod-18
-
 aiService:
   replicaCount: 2
   image:
     tag: prod-18
-
 config:
   environment: prod
-
 secret:
   appSecret: prod-secret-placeholder
-
 hpa:
   backend:
     minReplicas: 2
     maxReplicas: 5
-
   aiService:
     minReplicas: 2
     maxReplicas: 5
-
 ingress:
   host: "prod.40.80.76.139.nip.io"
-
 keyVault:
   secretName: cloudpulse-prod-app-secret
