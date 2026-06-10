@@ -31,7 +31,7 @@ hpa:
     maxReplicas: 3
 
 ingress:
-  host: "dev.40.80.76.139.nip.io"
+  host: ""
 
 keyVault:
   secretName: cloudpulse-dev-app-secret
