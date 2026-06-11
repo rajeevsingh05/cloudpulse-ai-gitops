@@ -21,6 +21,333 @@
   "links": [],
   "panels": [
     {
+      "id": 101,
+      "type": "stat",
+      "title": "Backend Targets UP",
+      "gridPos": {
+        "h": 4,
+        "w": 6,
+        "x": 0,
+        "y": 0
+      },
+      "datasource": {
+        "type": "prometheus",
+        "uid": "${DS_PROMETHEUS}"
+      },
+      "targets": [
+        {
+          "expr": "sum(up{job=\"cloudpulse-backend\",namespace=~\"$namespace\"})",
+          "legendFormat": "Backend UP",
+          "refId": "A"
+        }
+      ],
+      "fieldConfig": {
+        "defaults": {
+          "unit": "none"
+        },
+        "overrides": []
+      },
+      "options": {
+        "reduceOptions": {
+          "values": false,
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": ""
+        },
+        "orientation": "auto",
+        "textMode": "auto",
+        "colorMode": "value",
+        "graphMode": "area",
+        "justifyMode": "auto"
+      }
+    },
+    {
+      "id": 102,
+      "type": "stat",
+      "title": "AI Service Targets UP",
+      "gridPos": {
+        "h": 4,
+        "w": 6,
+        "x": 6,
+        "y": 0
+      },
+      "datasource": {
+        "type": "prometheus",
+        "uid": "${DS_PROMETHEUS}"
+      },
+      "targets": [
+        {
+          "expr": "sum(up{job=\"cloudpulse-ai-service\",namespace=~\"$namespace\"})",
+          "legendFormat": "AI UP",
+          "refId": "A"
+        }
+      ],
+      "fieldConfig": {
+        "defaults": {
+          "unit": "none"
+        },
+        "overrides": []
+      },
+      "options": {
+        "reduceOptions": {
+          "values": false,
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": ""
+        },
+        "orientation": "auto",
+        "textMode": "auto",
+        "colorMode": "value",
+        "graphMode": "area",
+        "justifyMode": "auto"
+      }
+    },
+    {
+      "id": 103,
+      "type": "stat",
+      "title": "Backend Pods Ready",
+      "gridPos": {
+        "h": 4,
+        "w": 6,
+        "x": 12,
+        "y": 0
+      },
+      "datasource": {
+        "type": "prometheus",
+        "uid": "${DS_PROMETHEUS}"
+      },
+      "targets": [
+        {
+          "expr": "sum(kube_pod_status_ready{condition=\"true\",namespace=~\"$namespace\",pod=~\"cloudpulse-backend-.*\"})",
+          "legendFormat": "Ready",
+          "refId": "A"
+        }
+      ],
+      "fieldConfig": {
+        "defaults": {
+          "unit": "none"
+        },
+        "overrides": []
+      },
+      "options": {
+        "reduceOptions": {
+          "values": false,
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": ""
+        },
+        "orientation": "auto",
+        "textMode": "auto",
+        "colorMode": "value",
+        "graphMode": "area",
+        "justifyMode": "auto"
+      }
+    },
+    {
+      "id": 104,
+      "type": "stat",
+      "title": "AI Pods Ready",
+      "gridPos": {
+        "h": 4,
+        "w": 6,
+        "x": 18,
+        "y": 0
+      },
+      "datasource": {
+        "type": "prometheus",
+        "uid": "${DS_PROMETHEUS}"
+      },
+      "targets": [
+        {
+          "expr": "sum(kube_pod_status_ready{condition=\"true\",namespace=~\"$namespace\",pod=~\"cloudpulse-ai-service-.*\"})",
+          "legendFormat": "Ready",
+          "refId": "A"
+        }
+      ],
+      "fieldConfig": {
+        "defaults": {
+          "unit": "none"
+        },
+        "overrides": []
+      },
+      "options": {
+        "reduceOptions": {
+          "values": false,
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": ""
+        },
+        "orientation": "auto",
+        "textMode": "auto",
+        "colorMode": "value",
+        "graphMode": "area",
+        "justifyMode": "auto"
+      }
+    },
+    {
+      "id": 105,
+      "type": "bargauge",
+      "title": "CloudPulse ServiceMonitor Target Health",
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 0,
+        "y": 4
+      },
+      "datasource": {
+        "type": "prometheus",
+        "uid": "${DS_PROMETHEUS}"
+      },
+      "targets": [
+        {
+          "expr": "sum by(job, namespace) (up{job=~\"cloudpulse-backend|cloudpulse-ai-service\",namespace=~\"$namespace\"})",
+          "legendFormat": "{{namespace}}/{{job}}",
+          "refId": "A"
+        }
+      ],
+      "fieldConfig": {
+        "defaults": {
+          "unit": "none"
+        },
+        "overrides": []
+      },
+      "options": {
+        "reduceOptions": {
+          "values": false,
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": ""
+        },
+        "orientation": "horizontal",
+        "displayMode": "gradient",
+        "showUnfilled": true
+      }
+    },
+    {
+      "id": 106,
+      "type": "bargauge",
+      "title": "CloudPulse Pod Restarts 24h",
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 12,
+        "y": 4
+      },
+      "datasource": {
+        "type": "prometheus",
+        "uid": "${DS_PROMETHEUS}"
+      },
+      "targets": [
+        {
+          "expr": "sum by(namespace,pod) (increase(kube_pod_container_status_restarts_total{namespace=~\"$namespace\",pod=~\"cloudpulse-(backend|ai-service|frontend)-.*\"}[24h]))",
+          "legendFormat": "{{namespace}}/{{pod}}",
+          "refId": "A"
+        }
+      ],
+      "fieldConfig": {
+        "defaults": {
+          "unit": "none"
+        },
+        "overrides": []
+      },
+      "options": {
+        "reduceOptions": {
+          "values": false,
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": ""
+        },
+        "orientation": "horizontal",
+        "displayMode": "gradient",
+        "showUnfilled": true
+      }
+    },
+    {
+      "id": 107,
+      "type": "timeseries",
+      "title": "CloudPulse Application CPU by Pod",
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 0,
+        "y": 12
+      },
+      "datasource": {
+        "type": "prometheus",
+        "uid": "${DS_PROMETHEUS}"
+      },
+      "targets": [
+        {
+          "expr": "sum by(namespace,pod) (rate(container_cpu_usage_seconds_total{namespace=~\"$namespace\",pod=~\"cloudpulse-(backend|ai-service|frontend)-.*\",container!=\"\",image!=\"\"}[5m]))",
+          "legendFormat": "{{namespace}}/{{pod}}",
+          "refId": "A"
+        }
+      ],
+      "fieldConfig": {
+        "defaults": {
+          "unit": "cores",
+          "decimals": 4
+        },
+        "overrides": []
+      },
+      "options": {
+        "legend": {
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "tooltip": {
+          "mode": "multi",
+          "sort": "none"
+        }
+      }
+    },
+    {
+      "id": 108,
+      "type": "timeseries",
+      "title": "CloudPulse Application Memory by Pod",
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 12,
+        "y": 12
+      },
+      "datasource": {
+        "type": "prometheus",
+        "uid": "${DS_PROMETHEUS}"
+      },
+      "targets": [
+        {
+          "expr": "sum by(namespace,pod) (container_memory_working_set_bytes{namespace=~\"$namespace\",pod=~\"cloudpulse-(backend|ai-service|frontend)-.*\",container!=\"\",image!=\"\"})",
+          "legendFormat": "{{namespace}}/{{pod}}",
+          "refId": "A"
+        }
+      ],
+      "fieldConfig": {
+        "defaults": {
+          "unit": "bytes"
+        },
+        "overrides": []
+      },
+      "options": {
+        "legend": {
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "tooltip": {
+          "mode": "multi",
+          "sort": "none"
+        }
+      }
+    },
+    {
       "id": 1,
       "type": "stat",
       "title": "Cluster Nodes Ready",
@@ -28,7 +355,7 @@
         "h": 4,
         "w": 6,
         "x": 0,
-        "y": 0
+        "y": 24
       },
       "datasource": {
         "type": "prometheus",
@@ -70,7 +397,7 @@
         "h": 4,
         "w": 6,
         "x": 6,
-        "y": 0
+        "y": 24
       },
       "datasource": {
         "type": "prometheus",
@@ -112,7 +439,7 @@
         "h": 4,
         "w": 6,
         "x": 12,
-        "y": 0
+        "y": 24
       },
       "datasource": {
         "type": "prometheus",
@@ -154,7 +481,7 @@
         "h": 4,
         "w": 6,
         "x": 18,
-        "y": 0
+        "y": 24
       },
       "datasource": {
         "type": "prometheus",
@@ -196,7 +523,7 @@
         "h": 8,
         "w": 12,
         "x": 0,
-        "y": 4
+        "y": 28
       },
       "datasource": {
         "type": "prometheus",
@@ -240,7 +567,7 @@
         "h": 8,
         "w": 12,
         "x": 12,
-        "y": 4
+        "y": 28
       },
       "datasource": {
         "type": "prometheus",
@@ -284,7 +611,7 @@
         "h": 8,
         "w": 12,
         "x": 0,
-        "y": 12
+        "y": 36
       },
       "datasource": {
         "type": "prometheus",
@@ -323,7 +650,7 @@
         "h": 8,
         "w": 12,
         "x": 12,
-        "y": 12
+        "y": 36
       },
       "datasource": {
         "type": "prometheus",
@@ -362,7 +689,7 @@
         "h": 8,
         "w": 12,
         "x": 0,
-        "y": 20
+        "y": 44
       },
       "datasource": {
         "type": "prometheus",
@@ -402,7 +729,7 @@
         "h": 8,
         "w": 12,
         "x": 12,
-        "y": 20
+        "y": 44
       },
       "datasource": {
         "type": "prometheus",
@@ -442,7 +769,7 @@
         "h": 8,
         "w": 12,
         "x": 0,
-        "y": 28
+        "y": 52
       },
       "datasource": {
         "type": "prometheus",
@@ -481,7 +808,7 @@
         "h": 8,
         "w": 12,
         "x": 12,
-        "y": 28
+        "y": 52
       },
       "datasource": {
         "type": "prometheus",
@@ -520,7 +847,7 @@
         "h": 8,
         "w": 12,
         "x": 0,
-        "y": 36
+        "y": 60
       },
       "datasource": {
         "type": "prometheus",
@@ -560,7 +887,7 @@
         "h": 8,
         "w": 12,
         "x": 12,
-        "y": 36
+        "y": 60
       },
       "datasource": {
         "type": "prometheus",
@@ -591,7 +918,7 @@
         "h": 8,
         "w": 12,
         "x": 0,
-        "y": 44
+        "y": 68
       },
       "datasource": {
         "type": "prometheus",
@@ -630,7 +957,7 @@
         "h": 8,
         "w": 12,
         "x": 12,
-        "y": 44
+        "y": 68
       },
       "datasource": {
         "type": "prometheus",
@@ -669,7 +996,7 @@
         "h": 8,
         "w": 12,
         "x": 0,
-        "y": 52
+        "y": 76
       },
       "datasource": {
         "type": "prometheus",
@@ -709,7 +1036,7 @@
         "h": 8,
         "w": 12,
         "x": 12,
-        "y": 52
+        "y": 76
       },
       "datasource": {
         "type": "prometheus",
@@ -748,7 +1075,7 @@
         "h": 9,
         "w": 12,
         "x": 0,
-        "y": 60
+        "y": 84
       },
       "datasource": {
         "type": "prometheus",
@@ -791,7 +1118,7 @@
         "h": 9,
         "w": 12,
         "x": 12,
-        "y": 60
+        "y": 84
       },
       "datasource": {
         "type": "prometheus",
@@ -834,7 +1161,7 @@
         "h": 8,
         "w": 12,
         "x": 0,
-        "y": 69
+        "y": 93
       },
       "datasource": {
         "type": "prometheus",
@@ -875,7 +1202,7 @@
         "h": 8,
         "w": 12,
         "x": 12,
-        "y": 69
+        "y": 93
       },
       "datasource": {
         "type": "prometheus",
@@ -907,6 +1234,283 @@
         "displayMode": "gradient",
         "showUnfilled": true
       }
+    },
+    {
+      "id": 109,
+      "type": "timeseries",
+      "title": "Backend JVM Memory Used",
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 0,
+        "y": 103
+      },
+      "datasource": {
+        "type": "prometheus",
+        "uid": "${DS_PROMETHEUS}"
+      },
+      "targets": [
+        {
+          "expr": "sum by(namespace, area) (jvm_memory_used_bytes{job=\"cloudpulse-backend\",namespace=~\"$namespace\"})",
+          "legendFormat": "{{namespace}}/{{area}}",
+          "refId": "A"
+        }
+      ],
+      "fieldConfig": {
+        "defaults": {
+          "unit": "bytes"
+        },
+        "overrides": []
+      },
+      "options": {
+        "legend": {
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "tooltip": {
+          "mode": "multi",
+          "sort": "none"
+        }
+      }
+    },
+    {
+      "id": 110,
+      "type": "timeseries",
+      "title": "Backend HTTP Request Rate",
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 12,
+        "y": 103
+      },
+      "datasource": {
+        "type": "prometheus",
+        "uid": "${DS_PROMETHEUS}"
+      },
+      "targets": [
+        {
+          "expr": "sum by(namespace, uri, status) (rate(http_server_requests_seconds_count{job=\"cloudpulse-backend\",namespace=~\"$namespace\"}[5m]))",
+          "legendFormat": "{{namespace}} {{uri}} {{status}}",
+          "refId": "A"
+        }
+      ],
+      "fieldConfig": {
+        "defaults": {
+          "unit": "reqps"
+        },
+        "overrides": []
+      },
+      "options": {
+        "legend": {
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "tooltip": {
+          "mode": "multi",
+          "sort": "none"
+        }
+      }
+    },
+    {
+      "id": 111,
+      "type": "timeseries",
+      "title": "Backend HTTP Latency p95",
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 0,
+        "y": 111
+      },
+      "datasource": {
+        "type": "prometheus",
+        "uid": "${DS_PROMETHEUS}"
+      },
+      "targets": [
+        {
+          "expr": "histogram_quantile(0.95, sum by(le, namespace, uri) (rate(http_server_requests_seconds_bucket{job=\"cloudpulse-backend\",namespace=~\"$namespace\"}[5m])))",
+          "legendFormat": "{{namespace}} {{uri}} p95",
+          "refId": "A"
+        }
+      ],
+      "fieldConfig": {
+        "defaults": {
+          "unit": "s"
+        },
+        "overrides": []
+      },
+      "options": {
+        "legend": {
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "tooltip": {
+          "mode": "multi",
+          "sort": "none"
+        }
+      }
+    },
+    {
+      "id": 112,
+      "type": "timeseries",
+      "title": "AI Service Process CPU",
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 12,
+        "y": 111
+      },
+      "datasource": {
+        "type": "prometheus",
+        "uid": "${DS_PROMETHEUS}"
+      },
+      "targets": [
+        {
+          "expr": "sum by(namespace,pod) (rate(process_cpu_seconds_total{job=\"cloudpulse-ai-service\",namespace=~\"$namespace\"}[5m]))",
+          "legendFormat": "{{namespace}}/{{pod}}",
+          "refId": "A"
+        }
+      ],
+      "fieldConfig": {
+        "defaults": {
+          "unit": "cores",
+          "decimals": 4
+        },
+        "overrides": []
+      },
+      "options": {
+        "legend": {
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "tooltip": {
+          "mode": "multi",
+          "sort": "none"
+        }
+      }
+    },
+    {
+      "id": 113,
+      "type": "timeseries",
+      "title": "AI Service Process Memory",
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 0,
+        "y": 119
+      },
+      "datasource": {
+        "type": "prometheus",
+        "uid": "${DS_PROMETHEUS}"
+      },
+      "targets": [
+        {
+          "expr": "process_resident_memory_bytes{job=\"cloudpulse-ai-service\",namespace=~\"$namespace\"}",
+          "legendFormat": "{{namespace}}/{{pod}} RSS",
+          "refId": "A"
+        }
+      ],
+      "fieldConfig": {
+        "defaults": {
+          "unit": "bytes"
+        },
+        "overrides": []
+      },
+      "options": {
+        "legend": {
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "tooltip": {
+          "mode": "multi",
+          "sort": "none"
+        }
+      }
+    },
+    {
+      "id": 114,
+      "type": "timeseries",
+      "title": "AI Service Python GC Collections",
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 12,
+        "y": 119
+      },
+      "datasource": {
+        "type": "prometheus",
+        "uid": "${DS_PROMETHEUS}"
+      },
+      "targets": [
+        {
+          "expr": "sum by(namespace, generation) (rate(python_gc_objects_collected_total{job=\"cloudpulse-ai-service\",namespace=~\"$namespace\"}[5m]))",
+          "legendFormat": "{{namespace}} gen {{generation}}",
+          "refId": "A"
+        }
+      ],
+      "fieldConfig": {
+        "defaults": {
+          "unit": "ops"
+        },
+        "overrides": []
+      },
+      "options": {
+        "legend": {
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "tooltip": {
+          "mode": "multi",
+          "sort": "none"
+        }
+      }
+    },
+    {
+      "id": 115,
+      "type": "table",
+      "title": "CloudPulse Current Scrape Targets",
+      "gridPos": {
+        "h": 8,
+        "w": 24,
+        "x": 0,
+        "y": 127
+      },
+      "datasource": {
+        "type": "prometheus",
+        "uid": "${DS_PROMETHEUS}"
+      },
+      "targets": [
+        {
+          "expr": "up{job=~\"cloudpulse-backend|cloudpulse-ai-service\",namespace=~\"$namespace\"}",
+          "legendFormat": "{{namespace}}/{{job}}/{{pod}}",
+          "refId": "A",
+          "format": "table",
+          "instant": true
+        }
+      ],
+      "fieldConfig": {
+        "defaults": {
+          "unit": "none"
+        },
+        "overrides": []
+      },
+      "options": {
+        "showHeader": true,
+        "cellHeight": "sm",
+        "footer": {
+          "show": false,
+          "reducer": [
+            "sum"
+          ],
+          "countRows": false,
+          "fields": ""
+        }
+      }
     }
   ],
   "refresh": "30s",
@@ -916,7 +1520,11 @@
     "kubernetes",
     "aks",
     "prometheus",
-    "infrastructure"
+    "infrastructure",
+    "application-monitoring",
+    "backend",
+    "ai-service",
+    "grafana"
   ],
   "templating": {
     "list": [
@@ -965,6 +1573,34 @@
         "skipUrlSync": false,
         "sort": 1,
         "type": "query"
+      },
+      {
+        "current": {
+          "selected": true,
+          "text": "All",
+          "value": ".*"
+        },
+        "datasource": {
+          "type": "prometheus",
+          "uid": "${DS_PROMETHEUS}"
+        },
+        "definition": "label_values(up{job=~\"cloudpulse-backend|cloudpulse-ai-service\"}, job)",
+        "hide": 0,
+        "includeAll": true,
+        "allValue": ".*",
+        "label": "CloudPulse Application",
+        "multi": true,
+        "name": "application",
+        "options": [],
+        "query": {
+          "query": "label_values(up{job=~\"cloudpulse-backend|cloudpulse-ai-service\"}, job)",
+          "refId": "PrometheusVariableQueryEditor-VariableQuery"
+        },
+        "refresh": 1,
+        "regex": "",
+        "skipUrlSync": false,
+        "sort": 1,
+        "type": "query"
       }
     ]
   },
@@ -973,8 +1609,8 @@
     "to": "now"
   },
   "timezone": "browser",
-  "title": "CloudPulse Kubernetes Infrastructure Dashboard",
-  "uid": "cloudpulse-k8s-infra",
-  "version": 2,
+  "title": "CloudPulse AI Kubernetes & Application Monitoring Dashboard",
+  "uid": "cloudpulse-ai-platform-monitoring",
+  "version": 3,
   "weekStart": ""
 }
