@@ -2,15 +2,15 @@ namespace: prod
 frontend:
   replicaCount: 2
   image:
-    tag: prod-18
+    tag: prod-30
 backend:
   replicaCount: 2
   image:
-    tag: prod-18
+    tag: prod-30
 aiService:
   replicaCount: 2
   image:
-    tag: prod-18
+    tag: prod-30
 config:
   environment: prod
 secret:
