@@ -2,15 +2,15 @@ namespace: dev
 frontend:
   replicaCount: 1
   image:
-    tag: dev-20
+    tag: dev-21
 backend:
   replicaCount: 1
   image:
-    tag: dev-20
+    tag: dev-21
 aiService:
   replicaCount: 1
   image:
-    tag: dev-20
+    tag: dev-21
 config:
   environment: dev
 secret:
