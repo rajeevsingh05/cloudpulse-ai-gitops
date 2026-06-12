@@ -224,7 +224,6 @@ Key alert conditions to configure in Alertmanager:
 > - `prometheus-targets.png` — Prometheus Targets page showing `cloudpulse-backend` and `cloudpulse-ai-service` as UP
 > - `grafana-dashboard.png` — Grafana showing the CloudPulse AI dashboard with live data
 > - `monitoring-pods.png` — `kubectl get pods -n monitoring` output
-> - `servicemonitor-yaml.png` — ServiceMonitor YAML in editor or applied to cluster
 
 ---
 

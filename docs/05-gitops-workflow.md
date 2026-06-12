@@ -252,8 +252,6 @@ Workloads in `dev` and `prod` are completely isolated at the namespace level. A 
 > - `argocd-prod-synced.png` — ArgoCD showing `cloudpulse-prod` app in Synced state
 > - `argocd-monitoring-synced.png` — ArgoCD showing monitoring app synced
 > - `argocd-app-tree.png` — ArgoCD application resource tree (pods, services, ingress, HPA)
-> - `helm-values-dev.png` — `values-dev.yaml` showing updated image tag after CD run
-
 ---
 
 *Previous: [CI/CD Workflow](04-cicd-workflow.md) | Next: [Deployment Guide](06-deployment-guide.md)*

@@ -61,13 +61,13 @@ CI runs only when application code or workflow files change not on GitOps or doc
 │  (reusable-build-test.yml)          │
 │  ├─ Build frontend (npm run build)  │
 │  ├─ Build backend (mvn package)     │
-│  │   └─ JaCoCo coverage            │
+│  │   └─ JaCoCo coverage             │
 │  └─ Test AI service (pytest)        │
 └────────────────┬────────────────────┘
                  │
         ┌────────┴────────┐
         ▼                 ▼
-┌──────────────┐  ┌────────────────────────┐
+┌──────────────┐  ┌─────────────────────────┐
 │ Job: docker  │  │ Job: sonarqube          │
 │ -validation  │  │ (PR + main only)        │
 │              │  │                         │

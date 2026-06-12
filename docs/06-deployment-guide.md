@@ -30,7 +30,7 @@ git clone https://github.com/rajeevsingh05/cloudpulse-ai-gitops.git
 
 ## Step 2: Provision Azure Infrastructure
 
-### Option A — Via GitHub Actions (Recommended)
+### Option A - Via GitHub Actions 
 
 1. Navigate to the **cloudpulse-ai** repository on GitHub
 2. Go to **Actions** → **Terraform Infrastructure**
@@ -38,7 +38,7 @@ git clone https://github.com/rajeevsingh05/cloudpulse-ai-gitops.git
 4. Select action: `plan` first to preview changes
 5. Re-run with action: `apply` to provision
 
-### Option B — Local Terraform
+### Option B - Local Terraform
 
 ```bash
 cd cloudpulse-ai/terraform
@@ -60,7 +60,7 @@ After apply, resources created:
 
 - Resource Group: `rajeevsingh`
 - AKS Cluster: `cloudpulse-aks`
-- ACR: `rajeevcloudpulseacr01`
+- ACR: `cloudpulseacr12345`
 - Log Analytics Workspace
 - Azure Key Vault
 - Virtual Network
@@ -151,8 +151,8 @@ git push origin develop
 ```
 
 This will:
-1. Trigger the CI pipeline — build and test all services
-2. Trigger the CD pipeline — build and push Docker images
+1. Trigger the CI pipeline - build and test all services
+2. Trigger the CD pipeline - build and push Docker images
 3. Update `values-dev.yaml` with the new image tag
 4. ArgoCD syncs to AKS
 
@@ -178,11 +178,10 @@ kubectl apply -f monitoring/servicemonitor-ai-service.yaml
 # List all pods in dev
 kubectl get pods -n dev
 
-# Expected output:
 # NAME                                        READY   STATUS    RESTARTS   AGE
-# cloudpulse-frontend-xxx-xxx                 1/1     Running   0          5m
-# cloudpulse-backend-xxx-xxx                  1/1     Running   0          5m
-# cloudpulse-ai-service-xxx-xxx               1/1     Running   0          5m
+# cloudpulse-frontend                         1/1     Running   0          5m
+# cloudpulse-backend                          1/1     Running   0          5m
+# cloudpulse-ai-service                       1/1     Running   0          5m
 ```
 
 ### Check Prod Namespace
@@ -199,9 +198,9 @@ kubectl get svc -n prod
 
 # Expected service types:
 # NAME                      TYPE        CLUSTER-IP      PORT(S)
-# cloudpulse-frontend       ClusterIP   10.0.x.x        80/TCP
-# cloudpulse-backend        ClusterIP   10.0.x.x        9090/TCP
-# cloudpulse-ai-service     ClusterIP   10.0.x.x        8000/TCP
+# cloudpulse-frontend       ClusterIP   10.0.106.209    80/TCP
+# cloudpulse-backend        ClusterIP   10.0.90.16      9090/TCP
+# cloudpulse-ai-service     ClusterIP   10.0.168.224    8000/TCP
 ```
 
 ### Check Ingress
@@ -210,7 +209,6 @@ kubectl get svc -n prod
 kubectl get ingress -n dev
 kubectl get ingress -n prod
 
-# Shows the external IP / hostname for accessing the application
 ```
 
 ### Check HPA
@@ -219,7 +217,7 @@ kubectl get ingress -n prod
 kubectl get hpa -n dev
 kubectl get hpa -n prod
 
-# Expected output:
+# Output:
 # NAME                       REFERENCE                TARGETS   MINPODS   MAXPODS   REPLICAS
 # cloudpulse-backend-hpa     Deployment/cloudpulse-backend   10%/70%   1         3         1
 # cloudpulse-ai-service-hpa  Deployment/cloudpulse-ai-service 5%/70%  1         3         1
