@@ -26,7 +26,7 @@ The two workflows are deliberately separated to enforce the principle that **not
 
 ---
 
-## CI Pipeline — `application-ci.yml`
+## CI Pipeline - `application-ci.yml`
 
 ### Trigger
 
@@ -89,7 +89,7 @@ CI runs only when application code or workflow files change not on GitOps or doc
 
 ---
 
-## CD Pipeline — `application-cd.yml`
+## CD Pipeline - `application-cd.yml`
 
 ### Trigger
 
@@ -102,7 +102,7 @@ on:
       - completed
 ```
 
-CD is **only** triggered when CI completes — and immediately fails if CI did not succeed.
+CD is **only** triggered when CI completes and immediately fails if CI did not succeed.
 
 ### Jobs and Steps
 
@@ -196,7 +196,7 @@ SonarCloud runs on:
 
 ---
 
-## Terraform Workflow — `terraform-infra.yml`
+## Terraform Workflow - `terraform-infra.yml`
 
 Triggered manually via `workflow_dispatch`:
 
@@ -234,11 +234,11 @@ All application CI/CD and Terraform jobs run on a **self-hosted runner** registe
 
 ## Screenshots
 
-> - `ci-workflow-success.png` — GitHub Actions CI workflow successful run
-> - `cd-workflow-success.png` — GitHub Actions CD workflow successful run
-> - `sonarcloud-result.png` — SonarCloud quality gate passed
-> - `acr-image-tags.png` — ACR showing `dev-*` and `prod-*` image tags
-> - `gitops-commit.png` — Automated commit in GitOps repo updating `values-dev.yaml`
+> - `ci-workflow-success.png` - GitHub Actions CI workflow successful run
+> - `cd-workflow-success.png` - GitHub Actions CD workflow successful run
+> - `sonarcloud-result.png`(docs\images\sonarcloud-result.png) - SonarCloud quality gate passed
+> - `acr-image-tags.png` - ACR showing `dev-*` and `prod-*` image tags
+> - `gitops-commit.png` - Automated commit in GitOps repo updating `values-dev.yaml`
 
 ---
 
