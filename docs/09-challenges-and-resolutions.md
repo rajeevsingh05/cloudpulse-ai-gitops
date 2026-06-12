@@ -30,7 +30,7 @@ The Terraform state held references to the old flat resource addresses (e.g., `a
      --resource-group rajeevsingh \
      --attach-acr rajeevcloudpulseacr01
    ```
-5. Forced ArgoCD sync to redeploy all pods — images pulled successfully
+5. Forced ArgoCD sync to redeploy all pods images pulled successfully
 
 ### Prevention
 
@@ -48,13 +48,13 @@ The CD pipeline (`application-cd.yml`) was not triggering automatically after th
 
 ### Root Cause
 
-The `workflow_run` trigger requires the **workflow name** in the YAML to exactly match the `name:` field of the CI workflow. A naming inconsistency — `Application CI` vs `application-ci` — caused the trigger to never fire.
+The `workflow_run` trigger requires the **workflow name** in the YAML to exactly match the `name:` field of the CI workflow. A naming inconsistency - `Application CI` vs `application-ci` - caused the trigger to never fire.
 
 Additionally, the CD workflow was initially in the same file as CI. Separating them into two files exposed a GitHub Actions limitation: `workflow_run` only triggers when the referenced workflow file is on the **default branch** (`main`). During development on `develop`, the trigger was silently skipped.
 
 ### Resolution
 
-1. Standardized workflow names — `name: Application CI` in CI, referenced exactly in CD
+1. Standardized workflow names - `name: Application CI` in CI, referenced exactly in CD
 2. Ensured both workflow files were committed and merged to `main` before testing the trigger chain
 3. Added a `check-ci` job as the first step in CD to fail fast if `github.event.workflow_run.conclusion != "success"`:
    ```yaml
@@ -79,7 +79,7 @@ Additionally, the CD workflow was initially in the same file as CI. Separating t
 
 ### Problem
 
-After deploying NGINX Ingress Controller and configuring `nip.io`-based hostnames (e.g., `cloudpulse.20.1.2.3.nip.io`), the application was not accessible from the development machine.
+After deploying NGINX Ingress Controller and configuring `nip.io`-based hostnames (`prod.40.80.76.139.nip.io`), the application was not accessible from the development machine.
 
 ### Root Cause
 
@@ -96,7 +96,7 @@ The company network blocked wildcard DNS resolution via `nip.io`. DNS queries fo
     -o jsonpath='{.status.loadBalancer.ingress[0].ip}'
   
   # Access
-  http://<EXTERNAL_IP>/
+  http://40.80.76.139//
   ```
 
 **Prod environment:**
@@ -121,8 +121,8 @@ After deploying the kube-prometheus-stack, the Grafana dashboards showed "No Dat
 
 Two issues were found:
 
-1. **ServiceMonitor resources were not deployed** — the `monitoring/servicemonitor-backend.yaml` and `monitoring/servicemonitor-ai-service.yaml` were not applied to the cluster
-2. **Prometheus RBAC** — the kube-prometheus-stack Prometheus instance did not have permission to discover ServiceMonitors in namespaces other than `monitoring`. The `namespaceSelector` in the ServiceMonitor was correctly set to `dev` and `prod`, but the Prometheus `serviceMonitorNamespaceSelector` was not configured to allow cross-namespace discovery
+1. **ServiceMonitor resources were not deployed** - the `monitoring/servicemonitor-backend.yaml` and `monitoring/servicemonitor-ai-service.yaml` were not applied to the cluster
+2. **Prometheus RBAC** - the kube-prometheus-stack Prometheus instance did not have permission to discover ServiceMonitors in namespaces other than `monitoring`. The `namespaceSelector` in the ServiceMonitor was correctly set to `dev` and `prod`, but the Prometheus `serviceMonitorNamespaceSelector` was not configured to allow cross-namespace discovery
 
 ### Resolution
 

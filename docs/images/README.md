@@ -1,49 +1,81 @@
 # Documentation Images
 
-Place all screenshots here as referenced in the documentation files.
-
-## Required Screenshots
-
-### Terraform / Infrastructure
-- `terraform-workflow-success.png` — GitHub Actions Terraform workflow successful run
-- `azure-resource-group.png` — Azure Portal resource group `rajeevsingh` showing all resources
-- `aks-overview.png` — AKS cluster overview from Azure Portal
-- `acr-repositories.png` — ACR showing all three image repositories
-- `terraform-backend-storage.png` — Storage Account showing `tfstate` container
-
-### CI/CD Workflows
-- `ci-workflow-success.png` — Application CI workflow run succeeded
-- `cd-workflow-success.png` — Application CD workflow run succeeded
-- `sonarcloud-result.png` — SonarCloud quality gate passed
-- `acr-image-tags.png` — ACR showing `dev-*` and `prod-*` image tags
-- `gitops-commit.png` — Automated commit in GitOps repo (values-dev.yaml update)
-
-### ArgoCD / GitOps
-- `argocd-dev-synced.png` — ArgoCD `cloudpulse-dev` app Synced + Healthy
-- `argocd-prod-synced.png` — ArgoCD `cloudpulse-prod` app Synced + Healthy
-- `argocd-monitoring-synced.png` — ArgoCD monitoring app Synced
-- `argocd-app-tree.png` — ArgoCD application resource tree
-
-### Kubernetes
-- `kubectl-pods-dev.png` — `kubectl get pods -n dev` output
-- `kubectl-pods-prod.png` — `kubectl get pods -n prod` output
-- `kubectl-svc-dev.png` — `kubectl get svc -n dev` output
-- `kubectl-ingress.png` — `kubectl get ingress -n dev/prod` output
-- `hpa-output.png` — `kubectl get hpa -n dev` output
-
-### Monitoring
-- `prometheus-targets.png` — Prometheus targets page showing services as UP
-- `grafana-dashboard.png` — Grafana CloudPulse AI dashboard with live data
-- `monitoring-pods.png` — `kubectl get pods -n monitoring` output
-
-### Application
-- `app-running.png` — CloudPulse AI frontend running in browser
-- `incident-analysis.png` — AI incident analysis result in the UI
-
-### Rollback
-- `rollback-workflow-dispatch.png` — Rollback workflow dispatch form
-- `rollback-workflow-success.png` — Rollback workflow completed
-- `rollback-gitops-commit.png` — Git commit showing rollback tag
+All screenshots referenced across the CloudPulse AI documentation.
 
 ---
 
+## Terraform / Infrastructure
+
+**GitHub Actions Terraform workflow successful run**
+![Terraform Workflow Success](terraform-workflow-success.png)
+
+**Azure Portal resource group `rajeevsingh` showing all resources**
+![Azure Resource Group](azure-resource-group.png)
+
+**ACR showing all three image repositories**
+![ACR Repositories](acr-repositories.png)
+
+**Azure Storage Account showing `tfstate` container**
+![Terraform Backend Storage](terraform-backend-storage.png)
+
+---
+
+## CI/CD Workflows
+
+**Application CI workflow run succeeded**
+![CI Workflow Success](ci-workflow-success.png)
+
+**Application CD workflow run succeeded**
+![CD Workflow Success](cd-workflow-success.png)
+
+**SonarCloud quality gate passed**
+![SonarCloud Result](sonarcloud-result.png)
+
+**ACR showing `dev-*` and `prod-*` image tags**
+![ACR Image Tags](acr-image-tags.png)
+
+**Automated commit in GitOps repo updating `values-dev.yaml`**
+![GitOps Commit](gitops-commit.png)
+
+---
+
+## ArgoCD / GitOps
+
+**ArgoCD `cloudpulse-dev` app Synced + Healthy**
+![ArgoCD Dev Synced](argocd-dev-synced.png)
+
+**ArgoCD `cloudpulse-prod` app Synced + Healthy**
+![ArgoCD Prod Synced](argocd-prod-synced.png)
+
+**ArgoCD monitoring app Synced**
+![ArgoCD Monitoring Synced](argocd-monitoring-synced.png)
+
+**ArgoCD application resource tree (pods, services, ingress, HPA)**
+![ArgoCD App Tree](argocd-app-tree.png)
+
+---
+
+## Monitoring
+
+**Prometheus Targets page showing `cloudpulse-backend` and `cloudpulse-ai-service` as UP**
+![Prometheus Targets](prometheus-targets.png)
+
+**Grafana CloudPulse AI dashboard with live data**
+![Grafana Dashboard](grafana-dashboard.png)
+
+![Grafana Dashboard](grafana-dashboard-1.png)
+
+**`kubectl get pods -n monitoring` output**
+![Monitoring Pods](monitoring-pods.png)
+
+---
+
+## Rollback
+
+**Rollback workflow dispatch form**
+![Rollback Workflow Dispatch](rollback-workflow-dispatch.png)
+
+**Rollback workflow completed successfully**
+![Rollback Workflow Success](rollback-workflow-success.png)
+
+---

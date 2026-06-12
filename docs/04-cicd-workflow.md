@@ -4,8 +4,8 @@
 
 CloudPulse AI uses a two-stage CI/CD pipeline implemented with **GitHub Actions**:
 
-1. **CI (Continuous Integration)** — triggered on every push/PR; builds, tests, validates Docker images, and runs SonarCloud quality analysis
-2. **CD (Continuous Delivery)** — triggered on CI success; builds and pushes Docker images to ACR, scans with Trivy, and updates image tags in the GitOps repository
+1. **CI (Continuous Integration)** - triggered on every push/PR; builds, tests, validates Docker images, and runs SonarCloud quality analysis
+2. **CD (Continuous Delivery)** - triggered on CI success; builds and pushes Docker images to ACR, scans with Trivy, and updates image tags in the GitOps repository
 
 The two workflows are deliberately separated to enforce the principle that **nothing is deployed unless all tests and quality gates pass**.
 
@@ -26,7 +26,7 @@ The two workflows are deliberately separated to enforce the principle that **not
 
 ---
 
-## CI Pipeline — `application-ci.yml`
+## CI Pipeline - `application-ci.yml`
 
 ### Trigger
 
@@ -42,7 +42,7 @@ on:
     branches: [develop, main]
 ```
 
-CI runs only when application code or workflow files change — not on GitOps or documentation changes.
+CI runs only when application code or workflow files change not on GitOps or documentation changes.
 
 ### Jobs and Steps
 
@@ -61,13 +61,13 @@ CI runs only when application code or workflow files change — not on GitOps or
 │  (reusable-build-test.yml)          │
 │  ├─ Build frontend (npm run build)  │
 │  ├─ Build backend (mvn package)     │
-│  │   └─ JaCoCo coverage            │
+│  │   └─ JaCoCo coverage             │
 │  └─ Test AI service (pytest)        │
 └────────────────┬────────────────────┘
                  │
         ┌────────┴────────┐
         ▼                 ▼
-┌──────────────┐  ┌────────────────────────┐
+┌──────────────┐  ┌─────────────────────────┐
 │ Job: docker  │  │ Job: sonarqube          │
 │ -validation  │  │ (PR + main only)        │
 │              │  │                         │
@@ -89,7 +89,7 @@ CI runs only when application code or workflow files change — not on GitOps or
 
 ---
 
-## CD Pipeline — `application-cd.yml`
+## CD Pipeline - `application-cd.yml`
 
 ### Trigger
 
@@ -102,7 +102,7 @@ on:
       - completed
 ```
 
-CD is **only** triggered when CI completes — and immediately fails if CI did not succeed.
+CD is **only** triggered when CI completes and immediately fails if CI did not succeed.
 
 ### Jobs and Steps
 
@@ -196,7 +196,7 @@ SonarCloud runs on:
 
 ---
 
-## Terraform Workflow — `terraform-infra.yml`
+## Terraform Workflow - `terraform-infra.yml`
 
 Triggered manually via `workflow_dispatch`:
 
@@ -232,15 +232,22 @@ All application CI/CD and Terraform jobs run on a **self-hosted runner** registe
 
 ---
 
-## Screenshots to Add
+## Screenshots
 
-> Add the following screenshots to `docs/images/`:
->
-> - `ci-workflow-success.png` — GitHub Actions CI workflow successful run
-> - `cd-workflow-success.png` — GitHub Actions CD workflow successful run
-> - `sonarcloud-result.png` — SonarCloud quality gate passed
-> - `acr-image-tags.png` — ACR showing `dev-*` and `prod-*` image tags
-> - `gitops-commit.png` — Automated commit in GitOps repo updating `values-dev.yaml`
+**GitHub Actions CI workflow successful run**
+![CI Workflow Success](images/ci-workflow-success.png)
+
+**GitHub Actions CD workflow successful run**
+![CD Workflow Success](images/cd-workflow-success.png)
+
+**SonarCloud quality gate passed**
+![SonarCloud Result](images/sonarcloud-result.png)
+
+**ACR showing `dev-*` and `prod-*` image tags**
+![ACR Image Tags](images/acr-image-tags.png)
+
+**Automated commit in GitOps repo updating `values-dev.yaml`**
+![GitOps Commit](images/gitops-commit.png)
 
 ---
 

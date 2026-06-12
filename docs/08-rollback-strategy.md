@@ -176,14 +176,13 @@ This provides a complete, time-stamped audit trail of every rollback event.
 
 ---
 
-## Screenshots to Add
+## Screenshots
 
-> Add the following screenshots to `docs/images/`:
->
-> - `rollback-workflow-dispatch.png` — GitHub Actions rollback workflow dispatch form
-> - `rollback-workflow-success.png` — Rollback workflow completed successfully
-> - `rollback-gitops-commit.png` — Git commit in GitOps repo showing `rollback(dev): ...`
-> - `argocd-after-rollback.png` — ArgoCD synced to previous version
+**GitHub Actions rollback workflow dispatch form**
+![Rollback Workflow Dispatch](images/rollback-workflow-dispatch.png)
+
+**Rollback workflow completed successfully**
+![Rollback Workflow Success](images/rollback-workflow-success.png)
 
 ---
 
