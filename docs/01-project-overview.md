@@ -2,7 +2,7 @@
 
 ## What is CloudPulse AI?
 
-CloudPulse AI is a cloud-native, microservices-based platform deployed on **Azure Kubernetes Service (AKS)**. It is designed to provide intelligent, real-time analysis of Kubernetes incidents — helping teams quickly diagnose and resolve issues such as `CrashLoopBackOff`, `OOMKilled`, `ImagePullBackOff`, pod scheduling failures, and network or configuration errors.
+CloudPulse AI is a cloud-native, microservices-based platform deployed on **Azure Kubernetes Service (AKS)**. It is designed to provide intelligent, real-time analysis of Kubernetes incidents helping teams quickly diagnose and resolve issues such as `CrashLoopBackOff`, `OOMKilled`, `ImagePullBackOff`, pod scheduling failures, and network or configuration errors.
 
 The platform follows modern DevOps and GitOps principles:
 
@@ -78,12 +78,12 @@ The AI service can analyze and provide recommendations for the following inciden
 
 ## Key Design Decisions
 
-1. **Separate application and GitOps repositories** — separation of concerns between application code and deployment configuration
-2. **Helm for packaging** — single chart with environment-specific values files avoids YAML duplication
-3. **ArgoCD auto-sync with self-heal** — ensures the cluster always matches what is declared in Git
-4. **Managed Identity authentication** — no static credentials; GitHub Actions runner and AKS use Azure Managed Identity
-5. **Azure Key Vault CSI Driver** — secrets are never stored in Git; injected at runtime from Azure Key Vault
-6. **Horizontal Pod Autoscaler** — backend and AI service scale automatically based on CPU utilization
+1. **Separate application and GitOps repositories** - separation of concerns between application code and deployment configuration
+2. **Helm for packaging** - single chart with environment-specific values files avoids YAML duplication
+3. **ArgoCD auto-sync with self-heal** - ensures the cluster always matches what is declared in Git
+4. **Managed Identity authentication** - no static credentials; GitHub Actions runner and AKS use Azure Managed Identity
+5. **Azure Key Vault CSI Driver** - secrets are never stored in Git; injected at runtime from Azure Key Vault
+6. **Horizontal Pod Autoscaler** - backend and AI service scale automatically based on CPU utilization
 
 ---
 

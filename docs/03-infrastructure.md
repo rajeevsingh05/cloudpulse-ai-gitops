@@ -12,12 +12,12 @@ All Azure infrastructure for CloudPulse AI is provisioned and managed using **Te
 |---|---|---|
 | Resource Group | `rajeevsingh` | Container for all CloudPulse resources |
 | Virtual Network | `cloudpulse-vnet` | Isolated network for AKS |
-| Subnet | `cloudpulse-subnet` | AKS node subnet |
+| Subnet | `cloudpulse-aks-subnet` | AKS node subnet |
 | Azure Kubernetes Service | `cloudpulse-aks` | Container orchestration platform |
-| Azure Container Registry | `rajeevcloudpulseacr01` | Private Docker image registry |
-| Log Analytics Workspace | `cloudpulse-law` | AKS diagnostics and logging |
+| Azure Container Registry | `cloudpulseacr12345` | Private Docker image registry |
+| Log Analytics Workspace | `cloudpulse-logs` | AKS diagnostics and logging |
 | Azure Key Vault | `cloudpulse-kv` | Secrets management |
-| Storage Account | Terraform backend | Remote Terraform state storage |
+| Storage Account | `cloudpulsetfstaterajeev` | Remote Terraform state storage |
 
 ---
 
@@ -54,7 +54,7 @@ terraform/
 | `resource_group_name` | `rajeevsingh` | Resource group name |
 | `location` | `centralindia` | Azure region |
 | `project_name` | `cloudpulse` | Naming prefix |
-| `acr_name` | `rajeevcloudpulseacr01` | ACR name (globally unique) |
+| `acr_name` | `cloudpulseacr12345` | ACR name (globally unique) |
 | `aks_cluster_name` | `cloudpulse-aks` | AKS cluster name |
 
 ---
@@ -68,7 +68,7 @@ Terraform state is stored remotely in an **Azure Storage Account** to enable tea
 terraform {
   backend "azurerm" {
     resource_group_name  = "rajeevsingh"
-    storage_account_name = "<storage_account>"
+    storage_account_name = "cloudpulsetfstaterajeev"
     container_name       = "tfstate"
     key                  = "cloudpulse.terraform.tfstate"
   }
@@ -98,7 +98,7 @@ Provisions the Azure Kubernetes Service cluster with:
 Provisions a private Azure Container Registry. The AKS cluster's Managed Identity is granted the **AcrPull** role automatically, so no image pull secrets are needed.
 
 ### Key Vault Module
-Provisions an Azure Key Vault for secret storage. The AKS workloads access secrets at runtime via the **Azure Key Vault CSI Driver** and `SecretProviderClass` — secrets are never stored in Kubernetes manifests or Git.
+Provisions an Azure Key Vault for secret storage. The AKS workloads access secrets at runtime via the **Azure Key Vault CSI Driver** and `SecretProviderClass` secrets are never stored in Kubernetes manifests or Git.
 
 ### Log Analytics Module
 Provisions a Log Analytics Workspace and connects it to AKS for container logs, node metrics, and diagnostic data.
@@ -161,7 +161,7 @@ on:
 |---|---|
 | Kubernetes Version | Latest stable |
 | Node Pool Type | System |
-| VM SKU | Standard_D2s_v3 (or as configured) |
+| VM SKU | Standard_D2as_v5 |
 | Authentication | Managed Identity |
 | Network Plugin | Azure CNI |
 | Log Analytics | Enabled |
@@ -185,13 +185,11 @@ After AKS provisioning, the following namespaces are created:
 
 ## Infrastructure Screenshots
 
-> **Note:** Add the following screenshots to `docs/images/`:
->
-> - `terraform-workflow-success.png` — GitHub Actions Terraform workflow run succeeded
-> - `azure-resource-group.png` — Azure Portal showing all resources in `rajeevsingh` resource group
-> - `aks-overview.png` — AKS cluster overview from Azure Portal
-> - `acr-repositories.png` — ACR showing `cloudpulse-frontend`, `cloudpulse-backend`, `cloudpulse-ai-service` repositories
-> - `terraform-backend-storage.png` — Azure Storage Account showing `tfstate` container
+> - `terraform-workflow-success.png` - GitHub Actions Terraform workflow run succeeded
+> - `azure-resource-group.png` - Azure Portal showing all resources in `rajeevsingh` resource group
+> - `aks-overview.png` - AKS cluster overview from Azure Portal
+> - `cloudpulse-ai-gitops\docs\images\acr-repositories.png` - ACR showing `cloudpulse-frontend`, `cloudpulse-backend`, `cloudpulse-ai-service` repositories
+> - `terraform-backend-storage.png` - Azure Storage Account showing `tfstate` container
 
 ---
 

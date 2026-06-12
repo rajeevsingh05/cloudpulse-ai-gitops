@@ -4,8 +4,8 @@
 
 CloudPulse AI follows a modern cloud-native architecture built around microservices, GitOps, and declarative infrastructure. The system is split into two primary planes:
 
-- **Data Plane** — the running application on AKS (Frontend, Backend, AI Service)
-- **Control Plane** — the tooling that manages deployments (GitHub Actions, ArgoCD, Terraform)
+- **Data Plane** - the running application on AKS (Frontend, Backend, AI Service)
+- **Control Plane** - the tooling that manages deployments (GitHub Actions, ArgoCD, Terraform)
 
 ---
 
@@ -162,11 +162,11 @@ Azure Subscription
 
 ## Security Architecture
 
-- **No static credentials in Git** — all secrets sourced from Azure Key Vault via CSI Driver
-- **Managed Identity** — AKS node pool uses system-assigned managed identity for ACR image pull
-- **Trivy scanning** — every Docker image is scanned for CVE vulnerabilities before deployment
-- **SonarCloud** — static code analysis on every pull request and main branch push
-- **RBAC** — Kubernetes namespaces isolate dev and prod workloads
+- **No static credentials in Git** - all secrets sourced from Azure Key Vault via CSI Driver
+- **Managed Identity** - AKS node pool uses system-assigned managed identity for ACR image pull
+- **Trivy scanning** - every Docker image is scanned for CVE vulnerabilities before deployment
+- **SonarCloud** - static code analysis on every pull request and main branch push
+- **RBAC** - Kubernetes namespaces isolate dev and prod workloads
 
 ---
 

@@ -4,8 +4,8 @@
 
 CloudPulse AI uses a two-stage CI/CD pipeline implemented with **GitHub Actions**:
 
-1. **CI (Continuous Integration)** — triggered on every push/PR; builds, tests, validates Docker images, and runs SonarCloud quality analysis
-2. **CD (Continuous Delivery)** — triggered on CI success; builds and pushes Docker images to ACR, scans with Trivy, and updates image tags in the GitOps repository
+1. **CI (Continuous Integration)** - triggered on every push/PR; builds, tests, validates Docker images, and runs SonarCloud quality analysis
+2. **CD (Continuous Delivery)** - triggered on CI success; builds and pushes Docker images to ACR, scans with Trivy, and updates image tags in the GitOps repository
 
 The two workflows are deliberately separated to enforce the principle that **nothing is deployed unless all tests and quality gates pass**.
 
@@ -42,7 +42,7 @@ on:
     branches: [develop, main]
 ```
 
-CI runs only when application code or workflow files change — not on GitOps or documentation changes.
+CI runs only when application code or workflow files change not on GitOps or documentation changes.
 
 ### Jobs and Steps
 
@@ -232,10 +232,8 @@ All application CI/CD and Terraform jobs run on a **self-hosted runner** registe
 
 ---
 
-## Screenshots to Add
+## Screenshots
 
-> Add the following screenshots to `docs/images/`:
->
 > - `ci-workflow-success.png` — GitHub Actions CI workflow successful run
 > - `cd-workflow-success.png` — GitHub Actions CD workflow successful run
 > - `sonarcloud-result.png` — SonarCloud quality gate passed
