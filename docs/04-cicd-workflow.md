@@ -236,7 +236,7 @@ All application CI/CD and Terraform jobs run on a **self-hosted runner** registe
 
 > - `ci-workflow-success.png` - GitHub Actions CI workflow successful run
 > - `cd-workflow-success.png` - GitHub Actions CD workflow successful run
-> - `sonarcloud-result.png`(docs\images\sonarcloud-result.png) - SonarCloud quality gate passed
+> - [sonarcloud-result.png](docs\images\sonarcloud-result.png) - SonarCloud quality gate passed
 > - `acr-image-tags.png` - ACR showing `dev-*` and `prod-*` image tags
 > - `gitops-commit.png` - Automated commit in GitOps repo updating `values-dev.yaml`
 
