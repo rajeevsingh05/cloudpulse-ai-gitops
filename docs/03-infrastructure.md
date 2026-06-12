@@ -191,6 +191,9 @@ After AKS provisioning, the following namespaces are created:
 **Azure Portal showing all resources in `rajeevsingh` resource group**
 ![Azure Resource Group](images/azure-resource-group.png)
 
+**AKS cluster overview from Azure Portal**
+![AKS Cluster](images/aks-overview.png)
+
 **ACR showing `cloudpulse-frontend`, `cloudpulse-backend`, `cloudpulse-ai-service` repositories**
 ![ACR Repositories](images/acr-repositories.png)
 
