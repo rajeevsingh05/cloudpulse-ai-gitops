@@ -244,14 +244,20 @@ Workloads in `dev` and `prod` are completely isolated at the namespace level. A 
 
 ---
 
-## Screenshots to Add
+## Screenshots
 
-> Add the following screenshots to `docs/images/`:
->
-> - `argocd-dev-synced.png` — ArgoCD showing `cloudpulse-dev` app in Synced state
-> - `argocd-prod-synced.png` — ArgoCD showing `cloudpulse-prod` app in Synced state
-> - `argocd-monitoring-synced.png` — ArgoCD showing monitoring app synced
-> - `argocd-app-tree.png` — ArgoCD application resource tree (pods, services, ingress, HPA)
+**ArgoCD showing `cloudpulse-dev` app in Synced state**
+![ArgoCD Dev Synced](images/argocd-dev-synced.png)
+
+**ArgoCD showing `cloudpulse-prod` app in Synced state**
+![ArgoCD Prod Synced](images/argocd-prod-synced.png)
+
+**ArgoCD showing monitoring app synced**
+![ArgoCD Monitoring Synced](images/argocd-monitoring-synced.png)
+
+**ArgoCD application resource tree (pods, services, ingress, HPA)**
+![ArgoCD App Tree](images/argocd-app-tree.png)
+
 ---
 
 *Previous: [CI/CD Workflow](04-cicd-workflow.md) | Next: [Deployment Guide](06-deployment-guide.md)*
