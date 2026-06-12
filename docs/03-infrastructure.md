@@ -185,11 +185,17 @@ After AKS provisioning, the following namespaces are created:
 
 ## Infrastructure Screenshots
 
-> - `terraform-workflow-success.png` - GitHub Actions Terraform workflow run succeeded
-> - `azure-resource-group.png` - Azure Portal showing all resources in `rajeevsingh` resource group
-> - `aks-overview.png` - AKS cluster overview from Azure Portal
-> - `acr-repositories.png`(docs/images/acr-repositories.png) - ACR showing `cloudpulse-frontend`, `cloudpulse-backend`, `cloudpulse-ai-service` repositories
-> - `terraform-backend-storage.png` - Azure Storage Account showing `tfstate` container
+**GitHub Actions Terraform workflow run succeeded**
+![Terraform Workflow Success](images/terraform-workflow-success.png)
+
+**Azure Portal showing all resources in `rajeevsingh` resource group**
+![Azure Resource Group](images/azure-resource-group.png)
+
+**ACR showing `cloudpulse-frontend`, `cloudpulse-backend`, `cloudpulse-ai-service` repositories**
+![ACR Repositories](images/acr-repositories.png)
+
+**Azure Storage Account showing `tfstate` container**
+![Terraform Backend Storage](images/terraform-backend-storage.png)
 
 ---
 

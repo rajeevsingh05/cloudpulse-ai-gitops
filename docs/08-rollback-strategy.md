@@ -178,8 +178,11 @@ This provides a complete, time-stamped audit trail of every rollback event.
 
 ## Screenshots
 
-> - `rollback-workflow-dispatch.png` - GitHub Actions rollback workflow dispatch form
-> - `rollback-workflow-success.png` - Rollback workflow completed successfully
+**GitHub Actions rollback workflow dispatch form**
+![Rollback Workflow Dispatch](images/rollback-workflow-dispatch.png)
+
+**Rollback workflow completed successfully**
+![Rollback Workflow Success](images/rollback-workflow-success.png)
 
 ---
 
