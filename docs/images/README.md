@@ -43,7 +43,7 @@ Place all screenshots here as referenced in the documentation files.
 ### Rollback
 - `rollback-workflow-dispatch.png` — Rollback workflow dispatch form
 - `rollback-workflow-success.png` — Rollback workflow completed
-- `rollback-gitops-commit.png` — Git commit showing rollback tag
+
 
 ---
 
